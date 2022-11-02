@@ -1,0 +1,4 @@
+{
+    "dotenv.enableAutocloaking": false,
+    "javascript.preferences.importModuleSpecifier": "non-relative"
+}
