@@ -1,6 +1,6 @@
-import { compare, genSalt, hash } from 'bcrypt';
-import mongoose, { Schema, model, Model, Document } from 'mongoose';
-import { SALT_ROUNDS } from '../config';
+import { compare, genSalt, hash } from "bcrypt";
+import mongoose, { Schema, model, Model, Document } from "mongoose";
+import { SALT_ROUNDS } from "../config";
 
 // for populated vs non-populated https://medium.com/@agentwhs/complete-guide-for-typescript-for-mongoose-for-node-js-8cc0a7e470c1
 
@@ -14,6 +14,7 @@ export interface UserDocument extends User, Document {
   comparePassword(password: string): Promise<boolean>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UserModel extends Model<UserDocument> {
   // static functions
 }
@@ -33,18 +34,16 @@ const UserSchema = new Schema<UserDocument, UserModel>(
         }
       },
     },
-  },
+  }
 );
 
-UserSchema.pre('save', async function (next) {
-  const user = this;
-
-  if (user.isModified('password') || user.isNew) {
+UserSchema.pre("save", async function (next) {
+  if (this.isModified("password") || this.isNew) {
     try {
       const salt = await genSalt(SALT_ROUNDS);
-      const hashed = await hash(user.password, salt);
+      const hashed = await hash(this.password, salt);
 
-      user.password = hashed;
+      this.password = hashed;
 
       return next();
     } catch (e) {
@@ -57,12 +56,12 @@ UserSchema.pre('save', async function (next) {
   return next();
 });
 
-const f = () => model('User', UserSchema);
-declare module 'mongoose' {
+const f = () => model("User", UserSchema);
+declare module "mongoose" {
   interface Models {
     // TODO hacky, but it works -> fix
     User: ReturnType<typeof f>;
   }
 }
 
-export const UserModel = mongoose.models.User || model('User', UserSchema);
+export const UserModel = mongoose.models.User || model("User", UserSchema);

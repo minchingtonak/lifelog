@@ -1,15 +1,15 @@
-import initDb from '@db/db';
-import { tryLogin } from '@db/user';
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import initDb from "@db/db";
+import { tryLogin } from "@db/user";
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Lifelog Credentials',
+      name: "Lifelog Credentials",
       credentials: {
-        username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials, _req) {
         if (!credentials) {

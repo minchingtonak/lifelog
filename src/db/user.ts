@@ -1,4 +1,4 @@
-import { UserModel } from '@models/user';
+import { UserModel } from "@models/user";
 
 export async function createUser(username: string, password: string) {
   const newUser = new UserModel({
