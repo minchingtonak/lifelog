@@ -31,7 +31,7 @@ exports = module.exports = {
       jsx: true,
     },
   },
-  extends: ["eslint:recommended", "next/core-web-vitals"],
+  extends: ["eslint:recommended", "next/core-web-vitals", "prettier"],
   plugins: [
     "react", // jsx lint rules come from here,
     "@typescript-eslint",
@@ -46,10 +46,18 @@ exports = module.exports = {
     "key-spacing": ["error", { mode: "strict" }],
     "keyword-spacing": ["error", { before: true, after: true }],
     "no-trailing-spaces": 2,
-    "no-unused-vars": "off",
     "space-infix-ops": ["error"],
     "unused-imports/no-unused-imports": "error",
-    "@typescript-eslint/no-unused-vars": ["error", { varsIgnorePattern: "^_" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+      },
+    ],
+    // "@typescript-eslint/no-unused-vars": "off",
     "react/jsx-uses-vars": 1, // eslint doesn't count JSX usage as import usage by default, this fixes that
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": [

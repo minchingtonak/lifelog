@@ -42,10 +42,23 @@ API Specification:
 /api/v1...
 
     /auth/... - auth
+
+    ---
+
     GET /content - get user's content
         paginated for infinite scroll
         sort
         type
+
+    POST /content - add content
+        body contains new content
+
+    PATCH /content - update content
+        update content given content id
+        partial updates supported
+
+    ---
+
 
 
 

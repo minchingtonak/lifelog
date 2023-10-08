@@ -24,6 +24,12 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        if (typeof user._id !== "string") {
+          console.error(`User '${user.username}' _id not string: `, user._id);
+
+          return null;
+        }
+
         return {
           id: user._id,
           name: user.username,
